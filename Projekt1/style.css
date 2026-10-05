@@ -84,13 +84,14 @@ time,
 mark,
 audio,
 video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
 }
+
 /* HTML5 display-role reset for older browsers */
 article,
 aside,
@@ -103,289 +104,363 @@ hgroup,
 menu,
 nav,
 section {
-  display: block;
+    display: block;
 }
+
 body {
-  line-height: 1;
+    line-height: 1;
 }
+
 ol,
 ul {
-  list-style: none;
+    list-style: none;
 }
+
 blockquote,
 q {
-  quotes: none;
+    quotes: none;
 }
+
 blockquote:before,
 blockquote:after,
 q:before,
 q:after {
-  content: "";
-  content: none;
+    content: "";
+    content: none;
 }
+
 table {
-  border-collapse: collapse;
-  border-spacing: 0;
+    border-collapse: collapse;
+    border-spacing: 0;
 }
+
 /*Ogolne*/
 body {
-  background-color: black;
-  color: white;
-  font-family: "Roboto Slab", serif;
-  font-weight: 400;
-  font-size: 15pt;
-  line-height: 40px;
+    background-color: black;
+    color: white;
+    font-family: "Roboto Slab", serif;
+    font-weight: 400;
+    font-size: 15pt;
+    line-height: 40px;
 }
+
 @media screen and (min-width: 1024px) {
-  body {
-    font-size: 24pt;
-  }
+    body {
+        font-size: 24pt;
+    }
 }
+
 section {
-  text-align: center;
+    text-align: center;
 }
+
 p {
-  padding: 0 10%;
-  margin: 1%;
-  margin-left: 50px;
-  margin-right: 50px;
-  font-size: 18px;
-  color: rgb(200, 200, 200);
+    padding: 0 10%;
+    margin: 1%;
+    margin-left: 50px;
+    margin-right: 50px;
+    font-size: 18px;
+    color: rgb(200, 200, 200);
 }
+
 @media screen and (min-width: 1024px) {
-  p {
-    font-size: 25px;
-    margin-right: 190px;
-    margin-left: 190px;
-  }
+    p {
+        font-size: 25px;
+        margin-right: 190px;
+        margin-left: 190px;
+    }
 }
+
 h1 {
-  padding-top: 10px;
+    padding-top: 10px;
 }
+
 h3 {
-  color: rgb(200, 200, 200);
+    color: rgb(200, 200, 200);
 }
+
 /*Gorna belka*/
 .website-links {
-  font-size: larger;
-  padding: 3px 15px;
-  color: white;
-  text-decoration: none;
-}
-nav {
-  background-color: rgb(29, 29, 29);
-  border-bottom-left-radius: 40px;
-  border-bottom-right-radius: 40px;
-  padding-bottom: 10px;
-}
-.logo {
-  max-width: 200px;
-  vertical-align: top;
-  float: right;
-}
-nav li {
-  padding: 5px;
-}
-@media screen and (min-width: 1024px) {
-  nav li {
-    display: inline-block;
-    vertical-align: middle;
-  }
-  .website-links {
     font-size: larger;
+    padding: 3px 15px;
     color: white;
     text-decoration: none;
-  }
-  nav {
-    border-bottom-left-radius: 70px;
-    border-bottom-right-radius: 48px;
-  }
-  .logo {
-    max-width: 140px;
-    vertical-align: top;
-  }
 }
+
+nav {
+    background-color: rgb(29, 29, 29);
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+    padding-bottom: 10px;
+}
+
+.logo {
+    max-width: 200px;
+    vertical-align: top;
+    float: left;
+}
+
+nav li {
+    padding: 5px;
+}
+
+@media screen and (min-width: 1024px) {
+    nav li {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .website-links {
+        font-size: larger;
+        color: white;
+        text-decoration: none;
+    }
+
+    nav {
+        border-bottom-left-radius: 70px;
+        border-bottom-right-radius: 48px;
+    }
+
+    .logo {
+        max-width: 140px;
+        vertical-align: top;
+    }
+}
+
 /*Media spolecznosciowe*/
 .social-links {
-  width: 25px;
-  padding: 7px 7px 7px 3px;
-  background-color: rgb(31, 31, 31);
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-  position: fixed;
-  right: 0;
-}
-@media screen and (min-width: 1024px) {
-  .social-links {
+    width: 25px;
+    padding: 7px 7px 7px 3px;
+    background-color: rgb(31, 31, 31);
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
+    position: fixed;
     left: 0;
-    top: 700px;
-  }
 }
+
+@media screen and (min-width: 1024px) {
+    .social-links {
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        left: 0;
+    }
+}
+
 /*Stopka*/
 footer {
-  font-size: 15px;
-  color: rgb(140, 140, 140);
-  float: right;
-  padding-right: 5px;
-  clear: both;
+    font-size: 15px;
+    color: rgb(140, 140, 140);
+    padding-right: 5px;
+    text-align: center;
+    clear: both;
 }
+
 @media screen and (min-width: 1024px) {
-  footer {
-    font-size: 20px;
-  }
+    footer {
+        font-size: 20px;
+    }
 }
+
 /*Belka - indeks*/
 .index {
-  font-size: 45px;
-  background-color: rgb(49, 49, 49);
-  z-index: -1;
-  position: relative;
-  padding-top: 80px;
-  padding-bottom: 30px;
-  top: -65px;
-  text-align: center;
-  border-bottom-right-radius: 40px;
-  border-bottom-left-radius: 40px;
-}
-@media screen and (min-width: 1024px) {
-  .index {
-    font-size: 65px;
-  }
-}
-.title {
-  font-size: 30px;
-  margin-top: 30px;
-  margin-bottom: 50px;
-}
-@media screen and (min-width: 1024px) {
-  .title {
-    font-size: 40px;
-    margin-top: 50px;
-    margin-bottom: 70px;
+    font-size: 45px;
+    background-color: rgb(49, 49, 49);
+    z-index: -1;
+    position: relative;
     padding-top: 80px;
-    padding-bottom: 80px;
-  }
+    padding-bottom: 30px;
+    top: -65px;
+    text-align: center;
+    border-bottom-right-radius: 40px;
+    border-bottom-left-radius: 40px;
 }
+
+@media screen and (min-width: 1024px) {
+    .index {
+        font-size: 65px;
+    }
+}
+
+.title {
+    font-size: 30px;
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
+@media screen and (min-width: 1024px) {
+    .title {
+        font-size: 40px;
+        margin-top: 50px;
+        margin-bottom: 70px;
+        padding-top: 80px;
+        padding-bottom: 80px;
+    }
+}
+
 /*Poszczegolne strony*/
 /*Landing page*/
 #introduction {
-  background: url(images/keyboard.jpg) 0 0;
-  background-size: cover;
-  z-index: -1;
-  position: relative;
-  padding-top: 80px;
-  padding-bottom: 30px;
-  top: -65px;
-  text-align: center;
-  border-bottom-right-radius: 40px;
-  border-bottom-left-radius: 40px;
+    background: url(images/keyboard.jpg) 0 0;
+    background-size: cover;
+    z-index: -1;
+    position: relative;
+    padding-top: 80px;
+    padding-bottom: 30px;
+    top: -65px;
+    text-align: center;
+    border-bottom-right-radius: 40px;
+    border-bottom-left-radius: 40px;
 }
+
 #first-line {
-  font-size: 30px;
-  padding-bottom: 30px;
-}
-#second-line {
-  font-size: 20px;
-  color: white;
-}
-#newsletter-text {
-  color: rgb(140, 140, 140);
-  margin-top: 120px;
-  font-size: 16px;
-}
-#newsletter-left {
-  background-color: rgb(49, 49, 49);
-  border: none;
-  padding: 10px;
-  border-top-left-radius: 14px;
-  border-bottom-left-radius: 14px;
-  font-size: 15px;
-  color: rgb(140, 140, 140);
-}
-#newsletter-right:hover {
-  background-color: rgb(65, 65, 65);
-}
-#newsletter-right {
-  background-color: rgb(140, 140, 140);
-  border: none;
-  padding: 10px;
-  border-top-right-radius: 14px;
-  border-bottom-right-radius: 14px;
-  color: rgb(200, 200, 200);
-  font-size: 15px;
-}
-@media screen and (min-width: 1024px) {
-  #first-line {
-    font-size: 40px;
-    padding-bottom: 40px;
-  }
-  #second-line {
     font-size: 30px;
-  }
-  #newsletter-text {
-    font-size: 23px;
-  }
-  #newsletter-left {
-    font-size: 15px;
-  }
+    padding-bottom: 30px;
 }
+
+#second-line {
+    font-size: 20px;
+    color: white;
+}
+
+#newsletter-text {
+    color: rgb(140, 140, 140);
+    margin-top: 120px;
+    font-size: 16px;
+}
+
+#newsletter-left {
+    background-color: rgb(49, 49, 49);
+    border: none;
+    padding: 10px;
+    border-top-left-radius: 14px;
+    border-bottom-left-radius: 14px;
+    font-size: 15px;
+    color: rgb(140, 140, 140);
+}
+
+#newsletter-right:hover {
+    background-color: rgb(65, 65, 65);
+}
+
+#newsletter-right {
+    background-color: rgb(140, 140, 140);
+    border: none;
+    padding: 10px;
+    border-top-right-radius: 14px;
+    border-bottom-right-radius: 14px;
+    color: rgb(200, 200, 200);
+    font-size: 15px;
+}
+
+@media screen and (min-width: 1024px) {
+    #first-line {
+        font-size: 40px;
+        padding-bottom: 40px;
+    }
+
+    #second-line {
+        font-size: 30px;
+    }
+
+    #newsletter-text {
+        font-size: 23px;
+    }
+
+    #newsletter-left {
+        font-size: 15px;
+    }
+}
+
 /*Space Page*/
 #rover {
-  background: url(images/rover.png) 50% 20%;
-  background-size: cover;
+    background: url(images/rover.png) 50% 20%;
+    background-size: cover;
 }
+
 #moon {
-  background: url(images/moon.png) 50%;
-  background-size: cover;
+    background: url(images/moon.png) 50%;
+    background-size: cover;
 }
+
 /*Technology Page*/
 #zoom {
-  background: url(images/zoom.png) 50% 100%;
-  background-size: cover;
+    background: url(images/zoom.png) 50% 100%;
+    background-size: cover;
 }
+
 #facebook {
-  background: url(images/facebook.png) 50% 30%;
-  background-size: cover;
+    background: url(images/facebook.png) 50% 30%;
+    background-size: cover;
 }
+
 /*Contact Page*/
 #contact-name,
 #contact-email,
 #contact-message,
 #contact-send {
-  background-color: rgb(29, 29, 29);
-  border: none;
-  padding: 10px;
-  border-radius: 14px;
-  color: rgb(140, 140, 140);
-  font-size: 15px;
-  text-align: center;
-  margin-top: 15px;
-  float: left;
-  clear: both;
+    background-color: rgb(29, 29, 29);
+    border: none;
+    padding: 10px;
+    border-radius: 14px;
+    color: rgb(140, 140, 140);
+    font-size: 15px;
+    text-align: center;
+    margin-top: 15px;
+    clear: both;
 }
+
 #contact-send:hover {
-  background-color: rgb(65, 65, 65);
+    background-color: rgb(65, 65, 65);
 }
+
+.contact_form {
+    display: flex;
+    flex-direction: column;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+input,
+textarea {
+    width: 100%;
+    box-sizing: border-box;
+}
+
 @media screen and (min-width: 1024px) {
-  #contact-name,
-  #contact-email,
-  #contact-message,
-  #contact-send {
-    margin-top: 20px;
-    margin-left: 500px;
-    margin-right: 500px;
-    float: none;
-  }
+
+    #contact-name,
+    #contact-email,
+    #contact-message,
+    #contact-send {
+        margin-top: 20px;
+    }
+
+    .contact_form {
+        max-width: 1000px;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
+
+
+
+input::placeholder {
+    font-family: "Roboto Slab", serif;
+    font-weight: 200;
+}
+
+textarea::placeholder {
+    font-family: "Roboto Slab", serif;
+    font-weight: 200;
+}
+
 /*About us Page*/
 #source {
-  text-decoration: none;
-  color: white;
-  float: right;
-  clear: both;
-  padding-right: 5px;
+    text-decoration: none;
+    color: cornflowerblue;
+    clear: both;
+    padding-right: 5px;
 }
