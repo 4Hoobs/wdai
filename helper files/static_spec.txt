@@ -1,0 +1,61 @@
+W ramach projektu należy stworzyć prostą statyczną stronę WWW.
+Tematyka projektu jest dowlona. Przykładowe tematy:
+• Osobiste portfolio
+• Strona informacyjna o hobby
+• Strona promująca fikcyjną firmę lub produkt
+• Strona wydarzenia
+• Strona o filmie / grze / książce
+Wymagania funkcjonalne
+Wymagania podstawowe [5.0 pkt]
+• Istnieją przynajmniej 3 podstrony (Home, Kontakt, Galeria)
+– Podpowiedź: Każda podstrona może osobnym plikiem HTML
+• Strona posiada layout grid / flexbox
+– U góry/z boku strony znajduje się navbar (<nav>) z linkami do wszystkich
+podstron.
+– Na dole strony znajduje się footer (<footer>) z Twoim imieniem i nazwiskiem.
+– Należy wykorzystać znaczniki semantyczne HTML.
+– Między podstronami różnić powinna się tylko zawartość główna. Nagłówek oraz
+stopka mają być jednolite na każdej z nich.
+• Strona główna - Home może zostać zaprojektowana w dowolny sposób, zgodny z
+tematyką projektu. Należy pamiętać, że jest to najważniejszy element projektu i pierwsza
+rzecz, którą widzi użytkownik wchodzący na stronę - więc powinna być reprezentacyjna i
+robić dobre pierwsze wrażenie.
+• Na podstronie Kontakt znajduje się formularz kontaktowy:
+– Wymagane pola w formularzu:
+• E-Mail (Pole tekstowe - input type text)
+• Temat wiadomości (Select z przynajmniej 3 dowolonymi opcjami)
+• Wiadomość (Textarea)
+• "Wyślij" (Przycisk, input type submit)
+– Pozostałe wymagania dotyczące formularza:
+• Pola E-mail oraz Wiadomość zawierać odpowiedni atrybut "placeholder"
+• Na podstronie Galeria należy umieścić:
+– Kilka zdjęć
+• Z wykorzystaniem grid lub flexbox zdjęcia powinny układać się po kilka w
+jednym wierszu i zawijać, jeżeli jest ich dużo (wrap).
+– Film (<video>)
+Wygląd strony [5.0 pkt]
+• Wykorzystać CSS do ostylowania strony (przykłady poniżej)
+– Dowolna czcionka
+• Mile widziane będzie użycie czcionki z google fonts - po wybraniu czcionki
+należy kliknąć "Get embed code" aby wyświetlić instrukcję dodania jej do
+strony.
+– wybór odpowiedniej palety kolorów
+– kolory tła i tekstu
+• Poprawne ustawienie elementów na stronie i odpowiednie odstepy
+• Konsystentny design, spójność graficzna
+• Dobry/atrakcyjny wygląd strony
+Wymagania dodatkowe, na wyższą ocenę [5.0 pkt]
+• [0.5 pkt] Walidacja danych w dowolnym formularzu znajdującym się na stronie - Krótki
+poradnik
+• [0.5 pkt] Udostępnienie strony publicznie - np. Github Pages
+• [2.0 pkt] Responsywność strony - poprawny wygląd bez względu na szerokość ekranu
+(na telefonie, na tablecie, na komputerze)
+• [2.0 pkt] Wykorzystać JS (przykłady poniżej)
+– zapisywanie preferencji użytkownika (cookies / localstorage)
+– obsługą formularza
+– stworzenie dynamicznych elementów (np. show / hide)
+– zegar
+– przechodzenie miedzy podstronami
+Proszę pamietać że podana punktacja to maksimum w danej kategorii, a opisany strona
+stanowi jedynie przykład nie gwarantujący otrzymania max punktów, wszystko zależy od
+jakości i stopnia skoplikowania projektu
