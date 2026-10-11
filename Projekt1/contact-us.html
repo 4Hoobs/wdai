@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet" />
     <script src="js/load.js" defer></script>
+    <script src="js/form.js" defer></script>
     <title>Contact us</title>
     <link rel="stylesheet" href="style.css" />
 </head>
@@ -19,8 +20,11 @@
         <div id="social-placeholder"></div>
         <section>
             <form action="" class="contact_form">
-                <input type="text" placeholder="Name goes here" name="" id="contact-name" />
-                <input type="email" placeholder="Email goes here" name="" id="contact-email" />
+                <label for="contact-name">Name</label>
+                <input type="text" placeholder="Name goes here" name="" id="contact-name" required/>
+                <label for="contact-email">Email</label>
+                <input type="email" placeholder="Email goes here" name="" id="contact-email" required/>
+                <label for="contact-subject">Subject</label>
                 <select id="contact-subject" required>
                     <option value="" disabled selected>Select a subject</option>
                     <option value="general">General inquiry</option>
@@ -32,7 +36,8 @@
                     <option value="other">Other</option>
                 </select>
 
-                <textarea name="" placeholder="Message goes here" id="contact-message" cols="30" rows="10"></textarea>
+                <label for="contact-message">Message</label>
+                <textarea name="" placeholder="Message goes here" id="contact-message" cols="30" rows="10" required></textarea>
                 <button id="contact-send" type="submit">Send</button>
             </form>
         </section>

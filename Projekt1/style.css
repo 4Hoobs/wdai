@@ -135,6 +135,15 @@ table {
 }
 
 /*Ogolne*/
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
 body {
     background-color: black;
     color: white;
@@ -420,6 +429,15 @@ footer {
     clear: both;
     font-family: "Roboto Slab";
     font-weight: 200;
+}
+
+.contact_form label {
+    margin-top: 15px;
+    margin-bottom: -5px;
+    text-align: center;
+    font-size: 15px;
+    color: rgb(140, 140, 140);
+    font-family: "Roboto Slab", serif;
 }
 
 #subject-select option {

@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
   loadTemplate('nav-placeholder', 'templates/nav.html').then(() => {
     const s = document.createElement('script');
     s.src = 'js/hamburger.js';
-    document.body.appendChild(s);   // scripts created via createElement DO run
+    document.body.appendChild(s);  
   });
   loadTemplate('social-placeholder', 'templates/social_media.html');
   loadTemplate('footer-placeholder', 'templates/footer.html');

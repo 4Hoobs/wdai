@@ -8,6 +8,7 @@
       rel="stylesheet"
     />
     <script src="js/load.js" defer></script>
+    <script src="js/newsletter.js" defer></script>
     <title>Hey!</title>
     <link rel="stylesheet" href="style.css" />
   </head>
@@ -42,11 +43,13 @@
           Sign up for our newsletter!
         </p>
         <form action="" class="newsletter">
+            <label for="newsletter-left" class="visually-hidden">Email</label>
           <input
             type="email"
             placeholder="Email goes here"
             name=""
             id="newsletter-left"
+            required
           />
           <button type="submit" id="newsletter-right">Sign up</button>
         </form>
