@@ -180,6 +180,10 @@ nav {
     border-bottom-left-radius: 40px;
     border-bottom-right-radius: 40px;
     padding-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .LogoContainer {
@@ -198,8 +202,8 @@ nav li {
 
 }
 
-nav ul {
-    display: flex;
+nav .nav-links{
+    display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -319,6 +323,8 @@ footer {
     border-top-right-radius: 14px;
     border-bottom-right-radius: 14px;
     color: rgb(200, 200, 200);
+    font-family: "Roboto Slab", serif;
+    font-weight: 200;
     font-size: 15px;
 }
 
@@ -463,6 +469,14 @@ video {
         flex-direction: row;
         align-self: center;
         justify-items: center;
+    }
+    .hamburger{
+        display: none;
+    }
+     nav .nav-links {
+        display: flex !important;   /* always visible on wide screens */
+        flex-direction: row;
+        justify-content: center;
     }
 
     .website-links {
