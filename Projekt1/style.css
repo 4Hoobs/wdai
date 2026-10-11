@@ -199,10 +199,50 @@ nav {
 
 nav li {
     padding: 5px;
-
 }
 
-nav .nav-links{
+nav li a:hover {
+    color: rgb(200, 200, 200);
+}
+
+.hamburger {
+    display: block;
+    margin: 0 auto;
+    margin-top: 10px;
+    width: 56px;
+    height: 32px;
+    background-color: rgb(49, 49, 49);
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.hamburger:hover,
+.hamburger:focus-visible {
+    background-color: rgb(65, 65, 65);
+    outline: none;
+}
+
+.chevron {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-right: 3px solid rgb(200, 200, 200);
+    border-bottom: 3px solid rgb(200, 200, 200);
+    transform: translateY(-3px) rotate(45deg);
+    transition: transform 0.25s, border-color 0.2s;
+}
+
+.hamburger:hover .chevron {
+    border-color: white;
+}
+
+.hamburger[aria-expanded="true"] .chevron {
+    transform: translateY(3px) rotate(-135deg);
+}
+
+nav .nav-links {
     display: none;
     flex-direction: column;
     justify-content: center;
@@ -210,6 +250,11 @@ nav .nav-links{
     padding-left: 0;
     margin: 0;
     margin-bottom: 10px;
+}
+
+nav .nav-links.open {
+    display: flex;
+    flex-direction: column;
 }
 
 
@@ -376,7 +421,8 @@ footer {
     font-family: "Roboto Slab";
     font-weight: 200;
 }
-#subject-select option{
+
+#subject-select option {
     font-family: "Roboto Slab";
     font-weight: 200;
 }
@@ -470,13 +516,20 @@ video {
         align-self: center;
         justify-items: center;
     }
-    .hamburger{
+
+    .hamburger {
         display: none;
     }
-     nav .nav-links {
-        display: flex !important;   /* always visible on wide screens */
+
+    nav .nav-links {
+        display: flex;
         flex-direction: row;
         justify-content: center;
+    }
+
+    nav .nav-links.open {
+        display: flex;
+        flex-direction: row;
     }
 
     .website-links {
