@@ -5,7 +5,7 @@ function loadTemplate(placeholderId, templatePath) {
   return fetch(templatePath)
     .then(res => res.text())
     .then(html => { placeholder.innerHTML = html; })
-    .catch(err => console.error(`Failed to load ${templatePath}:`, err));
+    .catch(err => console.error('Failed to load ${templatePath}:', err));
 }
 
 document.addEventListener('DOMContentLoaded', () => {
