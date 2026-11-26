@@ -43,6 +43,7 @@
     // We'll store loaded assets here
     const IMG = {};
     const SFX = {};
+    const BGM = {};
 
     async function loadAssets() {
         const [bg, base, pipeGreen, birdDown, birdMid, birdUp, msgImg, goImg] =
@@ -64,12 +65,13 @@
         IMG.message = msgImg;
         IMG.gameover = goImg;
 
-        const [sfxDie, sfxHit, sfxPoint, sfxSwoosh, sfxWing] = await Promise.all([
+        const [sfxDie, sfxHit, sfxPoint, sfxSwoosh, sfxWing, bgAC] = await Promise.all([
             loadAudio(assetBase + "Sound Efects/die.wav"),
             loadAudio(assetBase + "Sound Efects/hit.wav"),
             loadAudio(assetBase + "Sound Efects/point.wav"),
             loadAudio(assetBase + "Sound Efects/swoosh.wav"),
             loadAudio(assetBase + "Sound Efects/wing.wav"),
+            loadAudio(assetBase + "Sound Efects/sunny.mp3")
         ]);
 
         SFX.die = sfxDie;
@@ -77,6 +79,7 @@
         SFX.point = sfxPoint;
         SFX.swoosh = sfxSwoosh;
         SFX.wing = sfxWing;
+        BGM.sunny = bgAC;
     }
 
     function playSound(audio) {
@@ -86,23 +89,17 @@
         clone.play().catch(() => {});
     }
 
-    // ---------- Background music via looping swoosh ----------
-    let bgMusicInterval = null;
+    // ---------- Background music ----------
 
-    function startBgMusic() {
-        stopBgMusic();
-        // play swoosh in loop as ambient
-        playSound(SFX.wing);
-        bgMusicInterval = setInterval(() => {
-            playSound(SFX.wing);
-        }, 3000);
+    function startBgMusic(music) {
+        stopBgMusic(music);
+        music.loop = true;
+        music.play();
     }
 
-    function stopBgMusic() {
-        if (bgMusicInterval !== null) {
-            clearInterval(bgMusicInterval);
-            bgMusicInterval = null;
-        }
+    function stopBgMusic(music) {
+        music.pause();
+        music.currentTime = 0;
     }
 
     // ---------- Leaderboard (localStorage) ----------
@@ -293,13 +290,13 @@
 
     function endGame() {
         state = "gameover";
-        stopBgMusic();
+        stopBgMusic(BGM.sunny);
         saveScore(score);
         const board = getLeaderboard();
         finalScoreEl.textContent = score;
         bestScoreEl.textContent = board.length > 0 ? board[0] : 0;
         renderLeaderboard();
-        scoreDisplay.classList.add("hidden");
+        // scoreDisplay.classList.add("hidden");
         gameoverScreen.classList.remove("hidden");
     }
 
@@ -352,7 +349,7 @@
             resetGame();
             bird.vy = FLAP_FORCE;
             playSound(SFX.wing);
-            startBgMusic();
+            startBgMusic(BGM.sunny);
             // Spawn first pipe soon
             frameCount = PIPE_SPAWN_INTERVAL - 30;
         } else if (state === "playing") {
