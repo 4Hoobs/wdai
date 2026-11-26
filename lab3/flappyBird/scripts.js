@@ -134,6 +134,7 @@
     const GRAVITY = 1500;              // px / s^2
     const FLAP_FORCE = -500;          // px / s
     const PIPE_SPEED = 120;            // px / s
+    const BG_PARALLAX = 0.25;          // background scroll speed relative to ground/pipes
     const PIPE_SPAWN_INTERVAL = 5;    // seconds between spawns
     const DYING_BOUNCE_VY = -180;     // px / s
     const DYING_ROTATE_SPEED = 240;   // deg / s
@@ -149,7 +150,7 @@
 
     // ---------- Game state ----------
     let state = "start"; // start | playing | dying | gameover
-    let bird, pipes, score, pipeSpawnTimer, baseOffset;
+    let bird, pipes, score, pipeSpawnTimer, baseOffset, bgOffset;
     let animFrame = 0;
     let animTimer = 0;
     let lastTime = 0;
@@ -165,6 +166,7 @@
         score = 0;
         pipeSpawnTimer = 0;
         baseOffset = 0;
+        bgOffset = 0;
         animFrame = 0;
         animTimer = 0;
         scoreDisplay.textContent = "0";
@@ -256,7 +258,8 @@
                 }
             }
 
-            // Scroll ground
+            // Scroll background (parallax) and ground
+            bgOffset = (bgOffset + PIPE_SPEED * BG_PARALLAX * dt) % IMG.bg.width;
             baseOffset = (baseOffset + PIPE_SPEED * dt) % IMG.base.width;
 
             // Collision
@@ -290,6 +293,7 @@
                 animTimer -= ANIM_INTERVAL_START;
                 animFrame = (animFrame + 1) % IMG.birdFrames.length;
             }
+            bgOffset = (bgOffset + PIPE_SPEED * 0.5 * BG_PARALLAX * dt) % IMG.bg.width;
             baseOffset = (baseOffset + PIPE_SPEED * 0.5 * dt) % IMG.base.width;
         }
     }
@@ -307,9 +311,16 @@
     }
 
     // ---------- Draw ----------
+    function drawTiledX(img, offset, y) {
+        const w = img.width;
+        for (let x = -offset; x < W; x += w) {
+            ctx.drawImage(img, x, y);
+        }
+    }
+
     function draw() {
-        // Background (tile if needed)
-        ctx.drawImage(IMG.bg, 0, 0, W, H);
+        // Background (parallax scrolling)
+        drawTiledX(IMG.bg, bgOffset, 0);
 
         // Pipes
         for (const p of pipes) {
@@ -325,10 +336,7 @@
         }
 
         // Ground / base (scrolling)
-        const bw = IMG.base.width;
-        for (let x = -baseOffset; x < W; x += bw) {
-            ctx.drawImage(IMG.base, x, GROUND_Y);
-        }
+        drawTiledX(IMG.base, baseOffset, GROUND_Y);
 
         // Bird
         ctx.save();
