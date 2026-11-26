@@ -16,17 +16,21 @@ body {
 
 #game-container {
     position: relative;
-    width: 576px;
-    height: 1024px;
-    border: 3px solid #543847;
-    border-radius: 4px;
+    height: 100vh;
+    height: 100dvh;
+    aspect-ratio: 288 / 512;
+    max-width: 100vw;
+    max-height: calc(100vw * 512 / 288);
     overflow: hidden;
 }
 
 #gameCanvas {
     display: block;
-    width: 576px;
-    height: 1024px;
+    width: 100%;
+    height: 100%;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
 }
 
 /* ---------- Overlays ---------- */
@@ -48,14 +52,17 @@ body {
 /* ---------- Start Screen ---------- */
 .start-message {
     image-rendering: pixelated;
-    width: 184px;
+    width: 64%;
+    height: auto;
     margin-bottom: 20px;
     filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.5));
 }
 
 .start-hint {
     color: #fff;
-    font-size: 14px;
+    font-size: clamp(14px, 2.2vh, 24px);
+    text-align: center;
+    padding: 0 16px;
     text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
     animation: pulse 1.2s ease-in-out infinite;
 }
@@ -68,7 +75,8 @@ body {
 /* ---------- Game Over Screen ---------- */
 .gameover-title {
     image-rendering: pixelated;
-    width: 192px;
+    width: 66%;
+    height: auto;
     margin-bottom: 16px;
     filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.5));
 }
@@ -83,7 +91,8 @@ body {
     font-weight: bold;
     font-size: 15px;
     margin-bottom: 16px;
-    min-width: 200px;
+    width: 72%;
+    max-width: 340px;
 }
 
 .score-panel p {
@@ -131,16 +140,21 @@ body {
 /* ---------- Score Display ---------- */
 #score-display {
     position: absolute;
-    top: 12px;
-    right: 288px;
-    font-size: 32px;
-    font-weight: bold;
-    color: #fff;
-    text-shadow:
-        -2px -2px 0 #543847,
-         2px -2px 0 #543847,
-        -2px  2px 0 #543847,
-         2px  2px 0 #543847;
+    top: 3%;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 7%;
+    display: flex;
+    align-items: center;
+    gap: 2px;
     z-index: 5;
     pointer-events: none;
+}
+
+#score-display img {
+    height: 100%;
+    width: auto;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
 }

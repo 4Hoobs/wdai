@@ -17,6 +17,7 @@
     const H = 512;
     canvas.width = W;
     canvas.height = H;
+    ctx.imageSmoothingEnabled = true;
 
     // ---------- Asset loading ----------
     const assetBase = "assets/";
@@ -46,7 +47,7 @@
     const BGM = {};
 
     async function loadAssets() {
-        const [bg, base, pipeGreen, birdDown, birdMid, birdUp, msgImg, goImg] =
+        const [bg, base, pipeGreen, birdDown, birdMid, birdUp, msgImg, goImg, ...numberImgs] =
             await Promise.all([
                 loadImage(assetBase + "Flappy Bird/background-day.png"),
                 loadImage(assetBase + "Flappy Bird/base.png"),
@@ -56,6 +57,9 @@
                 loadImage(assetBase + "Flappy Bird/yellowbird-upflap.png"),
                 loadImage(assetBase + "UI/message.png"),
                 loadImage(assetBase + "UI/gameover.png"),
+                ...Array.from({ length: 10 }, (_, i) =>
+                    loadImage(`${assetBase}UI/Numbers/${i}.png`)
+                ),
             ]);
 
         IMG.bg = bg;
@@ -64,6 +68,7 @@
         IMG.birdFrames = [birdDown, birdMid, birdUp, birdMid]; // animation cycle
         IMG.message = msgImg;
         IMG.gameover = goImg;
+        IMG.numbers = numberImgs;
 
         const [sfxDie, sfxHit, sfxPoint, sfxSwoosh, sfxWing, bgAC] = await Promise.all([
             loadAudio(assetBase + "Sound Efects/die.wav"),
@@ -132,10 +137,10 @@
 
     // ---------- Game constants (time-based, per second) ----------
     const GRAVITY = 1500;              // px / s^2
-    const FLAP_FORCE = -500;          // px / s
-    const PIPE_SPEED = 120;            // px / s
+    const FLAP_FORCE = -450;          // px / s
+    const PIPE_SPEED = 200;            // px / s
     const BG_PARALLAX = 0.25;          // background scroll speed relative to ground/pipes
-    const PIPE_SPAWN_INTERVAL = 5;    // seconds between spawns
+    const PIPE_SPAWN_INTERVAL = 3;    // seconds between spawns
     const DYING_BOUNCE_VY = -180;     // px / s
     const DYING_ROTATE_SPEED = 240;   // deg / s
     const ANIM_INTERVAL_PLAY = 0.1;   // seconds per wing frame
@@ -155,6 +160,15 @@
     let animTimer = 0;
     let lastTime = 0;
 
+    function renderScore(value) {
+        scoreDisplay.innerHTML = "";
+        for (const ch of String(value)) {
+            const img = IMG.numbers[Number(ch)].cloneNode();
+            img.alt = ch;
+            scoreDisplay.appendChild(img);
+        }
+    }
+
     function resetGame() {
         bird = {
             x: 60,
@@ -169,7 +183,7 @@
         bgOffset = 0;
         animFrame = 0;
         animTimer = 0;
-        scoreDisplay.textContent = "0";
+        renderScore(0);
     }
 
     // ---------- Pipe generation ----------
@@ -253,7 +267,7 @@
                 if (!p.scored && p.x + PIPE_WIDTH < bird.x) {
                     p.scored = true;
                     score++;
-                    scoreDisplay.textContent = score;
+                    renderScore(score);
                     playSound(SFX.point);
                 }
             }
@@ -383,8 +397,12 @@
         }
     });
 
-    // Also allow tap / click on canvas
+    // Also allow tap / click on canvas or start screen
     canvas.addEventListener("click", () => {
+        flap();
+    });
+
+    startScreen.addEventListener("click", () => {
         flap();
     });
 
