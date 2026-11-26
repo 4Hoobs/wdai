@@ -130,11 +130,15 @@
         });
     }
 
-    // ---------- Game constants ----------
-    const GRAVITY = 0.1;
-    const FLAP_FORCE = -4;
-    const PIPE_SPEED = 1;
-    const PIPE_SPAWN_INTERVAL = 300; // frames between spawns
+    // ---------- Game constants (time-based, per second) ----------
+    const GRAVITY = 1500;              // px / s^2
+    const FLAP_FORCE = -500;          // px / s
+    const PIPE_SPEED = 120;            // px / s
+    const PIPE_SPAWN_INTERVAL = 5;    // seconds between spawns
+    const DYING_BOUNCE_VY = -180;     // px / s
+    const DYING_ROTATE_SPEED = 240;   // deg / s
+    const ANIM_INTERVAL_PLAY = 0.1;   // seconds per wing frame
+    const ANIM_INTERVAL_START = 8 / 60;
     const PIPE_WIDTH = 52;
     const GAP_MIN = 100;
     const GAP_MAX = 140;
@@ -145,9 +149,10 @@
 
     // ---------- Game state ----------
     let state = "start"; // start | playing | dying | gameover
-    let bird, pipes, score, frameCount, baseOffset;
+    let bird, pipes, score, pipeSpawnTimer, baseOffset;
     let animFrame = 0;
     let animTimer = 0;
+    let lastTime = 0;
 
     function resetGame() {
         bird = {
@@ -158,7 +163,7 @@
         };
         pipes = [];
         score = 0;
-        frameCount = 0;
+        pipeSpawnTimer = 0;
         baseOffset = 0;
         animFrame = 0;
         animTimer = 0;
@@ -210,33 +215,34 @@
     }
 
     // ---------- Update ----------
-    function update() {
+    function update(dt) {
         if (state === "playing") {
             // Bird physics
-            bird.vy += GRAVITY;
-            bird.y += bird.vy;
+            bird.vy += GRAVITY * dt;
+            bird.y += bird.vy * dt;
 
-            // Rotation based on velocity
-            bird.rotation = Math.max(-25, Math.min(bird.vy * 3.5, 90));
+            // Rotation based on velocity (scaled to match 60fps reference)
+            bird.rotation = Math.max(-25, Math.min((bird.vy / 60) * 3.5, 90));
 
             // Animate bird wings
-            animTimer++;
-            if (animTimer >= 6) {
-                animTimer = 0;
+            animTimer += dt;
+            if (animTimer >= ANIM_INTERVAL_PLAY) {
+                animTimer -= ANIM_INTERVAL_PLAY;
                 animFrame = (animFrame + 1) % IMG.birdFrames.length;
             }
 
             // Move pipes
             for (const p of pipes) {
-                p.x -= PIPE_SPEED;
+                p.x -= PIPE_SPEED * dt;
             }
 
             // Remove off-screen pipes
             pipes = pipes.filter((p) => p.x + PIPE_WIDTH > -10);
 
             // Spawn new pipes
-            frameCount++;
-            if (frameCount % PIPE_SPAWN_INTERVAL === 0) {
+            pipeSpawnTimer += dt;
+            if (pipeSpawnTimer >= PIPE_SPAWN_INTERVAL) {
+                pipeSpawnTimer -= PIPE_SPAWN_INTERVAL;
                 spawnPipe();
             }
 
@@ -251,7 +257,7 @@
             }
 
             // Scroll ground
-            baseOffset = (baseOffset + PIPE_SPEED) % IMG.base.width;
+            baseOffset = (baseOffset + PIPE_SPEED * dt) % IMG.base.width;
 
             // Collision
             const hit = checkCollision();
@@ -259,7 +265,7 @@
                 playSound(SFX.hit);
                 state = "dying";
                 // Bird falls after hitting pipe
-                bird.vy = -3; // small bounce
+                bird.vy = DYING_BOUNCE_VY; // small bounce
             } else if (hit === "ground") {
                 playSound(SFX.hit);
                 playSound(SFX.die);
@@ -267,9 +273,9 @@
             }
         } else if (state === "dying") {
             // Bird falls down after pipe collision
-            bird.vy += GRAVITY;
-            bird.y += bird.vy;
-            bird.rotation = Math.min(bird.rotation + 4, 90);
+            bird.vy += GRAVITY * dt;
+            bird.y += bird.vy * dt;
+            bird.rotation = Math.min(bird.rotation + DYING_ROTATE_SPEED * dt, 90);
 
             if (bird.y + BIRD_H / 2 >= GROUND_Y) {
                 bird.y = GROUND_Y - BIRD_H / 2;
@@ -279,12 +285,12 @@
         } else if (state === "start") {
             // Idle float on start screen
             bird.y = H / 2 - 20 + Math.sin(Date.now() / 300) * 8;
-            animTimer++;
-            if (animTimer >= 8) {
-                animTimer = 0;
+            animTimer += dt;
+            if (animTimer >= ANIM_INTERVAL_START) {
+                animTimer -= ANIM_INTERVAL_START;
                 animFrame = (animFrame + 1) % IMG.birdFrames.length;
             }
-            baseOffset = (baseOffset + 0.5) % IMG.base.width;
+            baseOffset = (baseOffset + PIPE_SPEED * 0.5 * dt) % IMG.base.width;
         }
     }
 
@@ -334,8 +340,12 @@
     }
 
     // ---------- Game loop ----------
-    function loop() {
-        update();
+    function loop(timestamp) {
+        if (!lastTime) lastTime = timestamp;
+        const dt = Math.min((timestamp - lastTime) / 1000, 0.05);
+        lastTime = timestamp;
+
+        update(dt);
         draw();
         requestAnimationFrame(loop);
     }
@@ -350,8 +360,8 @@
             bird.vy = FLAP_FORCE;
             playSound(SFX.wing);
             startBgMusic(BGM.sunny);
-            // Spawn first pipe soon
-            frameCount = PIPE_SPAWN_INTERVAL - 30;
+            // Spawn first pipe soon (0.5s)
+            pipeSpawnTimer = PIPE_SPAWN_INTERVAL - 0.5;
         } else if (state === "playing") {
             bird.vy = FLAP_FORCE;
             playSound(SFX.wing);
@@ -382,7 +392,7 @@
     async function init() {
         await loadAssets();
         resetGame();
-        loop();
+        requestAnimationFrame(loop);
     }
 
     init();
